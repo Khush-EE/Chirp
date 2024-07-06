@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block staticfiles %}
+<link rel="stylesheet" href="{% static "css/home.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for chirp in chirps %}
+            <div class="chirp">
+                {% if chirp.image %}
+                <img src="{{chirp.image.url}}">
+                {% endif %}
+                {{chirp.user.username}}
+                <div class="content">{{chirp.content}}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,93 @@
+@import url("./layout.css");
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.container input, textarea {
+    background-color: var(--secondary);
+    color: var(--dominant);
+    width: 100%;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: none;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    resize: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+    width: 20%;
+}
+
+h1 {
+    font-family: "Concert One", sans-serif;
+    font-size: 4em;
+    color: var(--dominant);
+}
+
+.formchild {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.container input:focus, textarea:focus{
+    border: 2px solid var(--dominant);
+    outline: none;
+}
+
+.container input label {
+    font-size: medium;
+    font-weight: 600;
+}
+
+button {
+    background-color: var(--dominant);
+    color: var(--secondary);
+    border-radius: 5px;
+    padding: 10px 30px;
+    border: 2px solid var(--dominant);
+    font-weight: bold;
+    align-self: self-start;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background-color: transparent;
+    color: var(--dominant);
+}
+
+.container .error {
+    position: absolute;
+    background-color: var(--dominant);
+    color: var(--secondary);
+    padding: 4px 10px;
+    width: 20%;
+    text-align: center;
+    border-radius: 5px;
+    top: 15vh;
+    animation: 'appear' 1s normal;
+}
+
+@keyframes appear {
+    from {
+        top: 17vh;
+        opacity: 0;
+    }
+    to {
+        top: 15vh;
+        opacity: 1;
+    }
+}

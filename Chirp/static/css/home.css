@@ -1,0 +1,27 @@
+@import url("./layout.css");
+
+.container {
+    min-height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 22vw 22vw 22vw 22vw;
+    padding: 2vw;
+    gap: 2vw;
+    overflow: scroll;
+}
+
+.chirp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 60vh;
+    gap: 10px;
+    border: 2px solid var(--dominant);
+    padding: 15px;
+}
+
+.chirp img {
+    height: 40%;
+    object-fit: cover;
+    /* padding: 15px; */
+}

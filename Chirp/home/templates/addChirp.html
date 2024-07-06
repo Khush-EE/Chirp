@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Post Chirp
+{% endblock %}
+
+{% block staticfiles %}
+<link rel="stylesheet" href="{% static "css/addChirp.css" %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="error">
+        {{error}}
+    </div>
+    <form action="/chirp/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <textarea name="content" id="" placeholder="Content"></textarea>
+        <input type="file" name="image">
+        <button type="submit">
+            Post
+        </button>
+    </form>
+</div>
+{% endblock %}

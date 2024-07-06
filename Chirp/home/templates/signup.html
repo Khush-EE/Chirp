@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% load static %} 
+
+{% block staticfiles %}
+<link rel="stylesheet" href="{% static "css/signup.css" %}">
+{% endblock %}
+
+{% block content %}
+   <div class="container">
+
+      {% if error %}
+            <div class="error">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                {{error}}
+            </div>
+      {% endif %}
+
+      <form action="" method="post" enctype="multipart/form-data">
+         {% csrf_token %}
+         <h1>Chirp.</h1>
+         <input type="text" name="username" placeholder="username">
+         <input type="text" name="password" placeholder="password">
+         <input type="text" name="email" placeholder="email">
+         <input type="text" name="name" placeholder="name">
+         <input type="text" name="headline" placeholder="headline">
+         <input type="text" name="bio" placeholder="bio">
+         <input type="file" name="profile_pic">
+         <button type="submit">Submit</button>
+        </form>
+   </div>
+{% endblock %}
