@@ -20,4 +20,6 @@ document.getElementsByTagName('img')[0].addEventListener('click', () => {
 })
 
 // items[1].addEventListener()
-console.log("js called")
+const nav = (id) => {
+    window.location.pathname = `/chirp/${id}`
+}

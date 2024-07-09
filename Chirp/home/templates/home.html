@@ -5,14 +5,31 @@
 <link rel="stylesheet" href="{% static "css/home.css" %}">
 {% endblock %}
 
+variables which can be use here are as follows
+
+{% comment %} chirp.image.url -----------------> Chirp image, it may or may not present {% endcomment %}
+
 {% block content %}
     <div class="container">
         {% for chirp in chirps %}
-            <div class="chirp">
+            <div class="chirp" onclick="nav({{chirp.id}})">
                 {% if chirp.image %}
                 <img src="{{chirp.image.url}}">
                 {% endif %}
+                <div>
+                    {% if chirp.user.profile_pic %}
+                        <img src="{{chirp.user.profile_pic.url}}">
+                    {% else %}
+                        <img src="{% static "noProfile.jpg" %}">
+                    {% endif %}
+                    <div>
+                        <p>{{chirp.user.name}}</p>
+                        <p>{{chirp.user.username}}</p>
+                    </div>
+                </div>
                 {{chirp.user.username}}
+                {{chirp.totalLikes}}
+                {{chirp.totalComments}}
                 <div class="content">{{chirp.content}}</div>
             </div>
         {% endfor %}

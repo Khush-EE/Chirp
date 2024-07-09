@@ -5,6 +5,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django import forms
 from django.conf import settings
 
+
 # Create your models here.
 
 class CustomUserManager(BaseUserManager):
@@ -82,7 +83,8 @@ class UserModel(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f'{self.username}, {self.email}'
-    
+
+
 class ChirpModel(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -93,8 +95,31 @@ class ChirpModel(models.Model):
     def __str__(self):
         return self.content;
 
+class LikeModel(models.Model):
 
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = UserModel
-        fields = ('username', 'email', 'password', 'name', 'headline', 'bio', 'profile_pic')
+    chirp = models.ForeignKey(ChirpModel, on_delete=models.CASCADE, related_name='likes')
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Liked by {self.user.username} on the chirp of {self.chirp.user.username}"
+
+class CommentModel(models.Model):
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    chirp = models.ForeignKey(ChirpModel, on_delete=models.CASCADE, related_name='comments')
+    content = models.TextField()
+    dateTime = models.DateTimeField(default=timezone.now)
+    likes = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'Comment by {self.user.username} on post of {self.chirp.user.username}'
+
+class ChatModel(models.Model):
+    
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='sender')
+    reciever = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reciever')
+    message = models.TextField()
+    dateTime = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return f"message send by {self.sender.username} to {self.reciever.username}"

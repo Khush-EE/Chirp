@@ -7,7 +7,7 @@
     grid-template-columns: 22vw 22vw 22vw 22vw;
     padding: 2vw;
     gap: 2vw;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .chirp {

@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="users">
+        {% for user in users %}
+            <div onclick="loadChats('{{user.username}}')">
+                {{user.username}}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="chatarea">
+        <div class="chats"></div>
+        <div>
+            <input type="text" class="message" id="inp" required>
+            <button type='submit' onclick="sendMessage('{{user.username}}')">Send</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block staticfiles %}
+<link rel="stylesheet" href="{% static "css/chat.css" %}">
+<script src="{% static "js/chat.js" %}"></script>
+{% endblock %}

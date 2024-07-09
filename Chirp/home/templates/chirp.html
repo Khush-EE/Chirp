@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block staticfiles %}
+<link rel="stylesheet" href="{% static "css/chirp.css" %}">
+<script src="{% static "js/chirp.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if chirp.image %}
+    <img src="{{chirp.image.url}}">
+    {% endif %}
+    <div>
+        {{chirp.content}}
+    </div>
+    <div>
+        {% for value in chirp.comments.values %}
+            <div>
+                {{value}}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        <p id="likesCount">{{chirp.likes.values.count}}</p> likes
+    </div>
+
+    <button onclick="toggleLike({{chirp.id}})" id="toggle">
+    {% if isLiked %}
+        dislike
+    {% else %}
+        like
+    {% endif %}
+    </button>
+    
+    <h1>Add Comment</h1>
+    <form action="/comment/" method="post">
+        {% csrf_token %}
+        <input type="number" name="id" hidden value={{chirp.id}}>
+        <label for="content">Content</label>
+        <textarea type="text" name="content" id="content" required></textarea>
+        <button type="submit">
+            Comment
+        </button>
+    </form>
+</div>
+{% endblock %}
