@@ -8,33 +8,80 @@
 
 {% block content %}
 <div class="container">
-    {% if chirp.image %}
-    <img src="{{chirp.image.url}}">
-    {% endif %}
-    <div>
+    <div class="topBar">
+        
+        {% if chirp.user.profile_pic.url %}
+        <img src="{{chirp.user.profile_pic.url}}" alt="" class="profile">
+        {% else %}
+        <img src="{% static "noProfile.jpg" %}" alt="" class="profile">
+        {% endif %}
+
+        <div class="userDetails">
+            <span id="name">{{chirp.user.name}}</span>
+            <span id="username">@{{chirp.user.username}}</span>
+        </div>
+    </div>
+    <div class="content">
         {{chirp.content}}
     </div>
-    <div>
+    {% if chirp.image %}
+    <img src="{{chirp.image.url}}" class="cover">
+    {% endif %}
+    {% comment %} <div>
         {% for value in chirp.comments.values %}
             <div>
                 {{value}}
             </div>
         {% endfor %}
+    </div> {% endcomment %}
+
+    <div class="line"></div>
+
+    <div class="bottomBar">
+        <div class="likes">
+            <div onclick="toggleLike({{chirp.id}})" id="toggle">
+                {% if isLiked %}
+                        <i class="fa-solid fa-heart" style={margin: "3px";}></i>
+                {% else %}
+                        <i class="fa-regular fa-heart" style={margin: "3px";}></i>
+                {% endif %}
+            </div>
+            <p id="likesCount">{{chirp.likes.values.count}} likes</p>
+        </div>
+        <div class="comments">
+            <i class="fa-regular fa-comment" style={margin: "3px";}></i>
+            <p>{{chirp.comments.count}} comments</p>
+        </div>
     </div>
 
-    <div>
-        <p id="likesCount">{{chirp.likes.values.count}}</p> likes
-    </div>
+    <div class="line"></div>
 
-    <button onclick="toggleLike({{chirp.id}})" id="toggle">
-    {% if isLiked %}
-        dislike
-    {% else %}
-        like
+    {% if chirp.comments.count %}
+        {% comment %} <span style="font-size: larger; width: 100%;">Comments</span> {% endcomment %}
+        {% for comment in comments %}
+            <div class="comment">
+                <div class="topBar topBar2">
+                    {% if comment.user.profile_pic %}
+                    <img src="{{comment.user.profile_pic.url}}" alt="" class="profile">
+                    {% else %}
+                    <img src="{% static "noProfile.jpg" %}" alt="" class="profile">
+                    {% endif %}
+            
+                    <div class="userDetails">
+                        <span id="name">{{comment.user.name}}</span>
+                        <span id="username">@{{comment.user.username}}</span>
+                    </div>
+
+                    <div class="time">{{comment.dateTime}}</div>
+                </div>
+                <div class="content">{{comment.content}}</div>
+            </div>
+
+            <div class="line"></div>
+        {% endfor %}
     {% endif %}
-    </button>
     
-    <h1>Add Comment</h1>
+    {% comment %} <h1>Add Comment</h1>
     <form action="/comment/" method="post">
         {% csrf_token %}
         <input type="number" name="id" hidden value={{chirp.id}}>
@@ -43,6 +90,6 @@
         <button type="submit">
             Comment
         </button>
-    </form>
+    </form> {% endcomment %}
 </div>
 {% endblock %}

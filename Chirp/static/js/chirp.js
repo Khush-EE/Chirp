@@ -9,10 +9,10 @@ const toggleLike = async (id) => {
         console.log(likesCount.innerText)
         if(data.liked) {
             likesCount.innerText = Number(likesCount.innerText) + 1
-            toggle.innerText = 'Dislike'
+            toggle.innerHTML = '<i class="fa-solid fa-heart" style={margin: "3px";}></i>'
         } else {
             likesCount.innerText = Number(likesCount.innerText) - 1
-            toggle.innerText = 'Like'
+            toggle.innerHTML = '<i class="fa-regular fa-heart" style={margin: "3px";}></i>'
         }
     }
 }

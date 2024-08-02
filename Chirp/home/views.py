@@ -3,12 +3,14 @@ from django.contrib.auth import login, logout
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import *
-from django.db.models import Count
+from django.db.models import Count, Subquery, OuterRef, Q
 # from .views import *
 
 # Create your views here.
 def getAllChirps(request):
-    chirps = ChirpModel.objects.annotate(totalLikes=Count('likes'))
+    chirps = ChirpModel.objects.annotate(totalLikes=Count('likes'), totalComments=Count('comments'), isLiked=Subquery(LikeModel.objects.filter(Q(chirp=OuterRef('id')) & Q(user=request.user)).values('id')))
+    print(chirps.query)
+
     return render(request, 'home.html', {'chirps': chirps, 'user': request.user})
 
 def signup(request):
@@ -39,6 +41,7 @@ def loginView(request):
         print(e)
         return render(request, 'login.html', {'error': e});
 
+@login_required(login_url='/login/')
 def toggleLike(request):
     try:
         id = request.GET.get('id', None)
@@ -73,16 +76,18 @@ def addChirp(request):
         else:
             return render(request, 'addChirp.html')
     except Exception as e:
+        print(e)
         return render(request, 'addChirp.html', {'error': e})
     
 def getChirp(request, id):
     try:
         chirp = ChirpModel.objects.get(id=id)
         isLiked = get_object_or_404(LikeModel, chirp=chirp, user=request.user)
+        comments = CommentModel.objects.filter(chirp=chirp).order_by("-dateTime")
     except Exception as e:
         isLiked = 0
 
-    return render(request, 'chirp.html', {"chirp": chirp, "isLiked": isLiked})
+    return render(request, 'chirp.html', {"chirp": chirp, "isLiked": isLiked, "comments": comments})
 
 @login_required(login_url='/login/')
 def addComment(request):

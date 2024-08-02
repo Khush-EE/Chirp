@@ -7,21 +7,28 @@
 
 {% block staticfiles %}
 <link rel="stylesheet" href="{% static "css/addChirp.css" %}">
+<script src="{% static "js/addChirp.js" %}"></script>
 {% endblock %}
 
 {% block content %}
 
-<div class="container">
+<div class="post-container">
+    {% if error %}
     <div class="error">
-        {{error}}
+        <i class="fa-solid fa-triangle-exclamation"></i>{{error}}
     </div>
+    {% endif %}
     <form action="/chirp/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <textarea name="content" id="" placeholder="Content"></textarea>
-        <input type="file" name="image">
-        <button type="submit">
-            Post
-        </button>
+        <div class="formElem">
+            <textarea name="content" id="" placeholder="Content"></textarea>
+            <label for="image" id="label">Choose Image</label>
+            <input type="file" name="image" id="image" >
+            <button type="submit">
+                Post
+            </button>
+        </div>
+        <img src="{% static "camera.png" %}" alt="" id="show">
     </form>
 </div>
 {% endblock %}

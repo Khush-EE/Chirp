@@ -3,9 +3,10 @@
 
 {% block staticfiles %}
 <link rel="stylesheet" href="{% static "css/home.css" %}">
+<script src="{% static "js/home.js" %}"></script>
 {% endblock %}
 
-variables which can be use here are as follows
+{% comment %} variables which can be use here are as follows {% endcomment %}
 
 {% comment %} chirp.image.url -----------------> Chirp image, it may or may not present {% endcomment %}
 
@@ -13,24 +14,34 @@ variables which can be use here are as follows
     <div class="container">
         {% for chirp in chirps %}
             <div class="chirp" onclick="nav({{chirp.id}})">
-                {% if chirp.image %}
-                <img src="{{chirp.image.url}}">
-                {% endif %}
-                <div>
+                <div class="profile-part">
                     {% if chirp.user.profile_pic %}
-                        <img src="{{chirp.user.profile_pic.url}}">
+                        <img src="{{chirp.user.profile_pic.url}}" class="profile">
                     {% else %}
-                        <img src="{% static "noProfile.jpg" %}">
+                        <img src="{% static "noProfile.jpg" %}" class="profile">
                     {% endif %}
                     <div>
-                        <p>{{chirp.user.name}}</p>
-                        <p>{{chirp.user.username}}</p>
+                        <p id="name">{{chirp.user.name}}</p>
+                        <p id="username">@{{chirp.user.username}}</p>
                     </div>
                 </div>
-                {{chirp.user.username}}
-                {{chirp.totalLikes}}
-                {{chirp.totalComments}}
-                <div class="content">{{chirp.content}}</div>
+                {% if chirp.image %}
+                <img src="{{chirp.image.url}}" class="image">
+                {% endif %}
+                {% comment %} {{chirp.user.username}} {% endcomment %}
+                <div class="content">{{chirp.content}}...</div>
+                <div class="bottomBar">
+                    <div class="likes">
+                        {% if chirp.isLiked %}
+                            <i class="fa-solid fa-heart" style={margin: "3px";}></i>
+                        {% else %}
+                            <i class="fa-regular fa-heart" style={margin: "3px";}></i>
+                        {% endif %}
+                        {{chirp.totalLikes}}
+                    </div>
+                    <div class="comments"><i class="fa-regular fa-comment"></i>{{chirp.totalComments}}</div>
+                    <i class="fa-solid fa-share"></i>
+                </div>
             </div>
         {% endfor %}
     </div>

@@ -3,11 +3,11 @@
 .container {
     width: 70vw;
     margin: auto;
-    margin-top: 10vh;
+    /* margin-top: 10vh; */
     font-family: "Rubik", sans-serif;
     line-height: 2em;
     padding-bottom: 10vh;
-    color: #3d3d3d;
+    color: #d2d2d2;
 }
 
 h2, h1{

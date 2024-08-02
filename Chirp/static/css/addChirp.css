@@ -1,6 +1,109 @@
 @import url("./layout.css");
 
-.container {
-    width: 100vw;
+.post-container {
+    width: 80vw;
     height: 100vh;
+    background-color: var(--tertiary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    /* gap: 20px; */
+    /* padding: 4% 0; */
+    position: relative;
+    box-sizing: border-box;
+}
+
+.post-container form {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.post-container #show {
+    width: 45%;
+    max-height: 80%;
+    object-fit: cover;
+    background-color: var(--secondary);
+    border: 2px dashed black;
+    /* padding: 2px; */
+}
+
+.post-container textarea {
+    width: 100%;
+    background-color: var(--secondary);
+    box-sizing: border-box;
+    resize: none;
+    border-radius: 5px;
+    padding: 15px;
+    border: 2px solid transparent;
+    color: var(--dominant);
+    height: 45vh;
+}
+
+.post-container textarea:focus {
+    outline: none;
+    border: 2px solid var(--dominant);
+}
+
+.post-container .formElem {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    height: 80%;
+}
+
+.error {
+    position: absolute;
+    background-color: var(--dominant);
+    color: var(--secondary);
+    padding: 4px 10px;
+    width: 20%;
+    text-align: center;
+    border-radius: 5px;
+    top: 5vh;
+    animation: 'appear' 1s normal;
+    /* visibility: hidden; */
+}
+
+.post-container form img{
+    background-color: var(--tertiary);
+}
+
+.post-container button, #label {
+    padding: 10px 25px;
+    cursor: pointer;
+    color: var(--tertiary);
+    background-color: var(--dominant);
+    border-radius: 5px;
+    font-size: small;
+    font-weight: bold;
+    border: 2px solid var(--dominant);
+    transition: all;
+    transition-duration: 400ms;
+}
+
+.post-container button:hover, #label:hover {
+    background-color: transparent;
+    color: var(--dominant);
+    /* border-color: var(); */
+}
+
+.post-container input {
+    display: none;
+}
+
+@keyframes appear {
+    from {
+        top: 7vh;
+        opacity: 0;
+    }
+    to {
+        top: 5vh;
+        opacity: 1;
+    }
 }

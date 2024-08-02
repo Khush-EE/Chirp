@@ -1,0 +1,125 @@
+@import "./layout.css";
+
+.container {
+    width: 80vw;
+    height: auto;
+    min-height: 100vh;
+    padding: 0px 15%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding-bottom: 25px;
+    gap: 10px;
+}
+
+.container .cover {
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+}
+
+.container .topBar {
+    width: 100%;
+    height: 100px;
+    background-color: var(--tertiary);
+    display: flex;
+    align-items: flex-end;
+    justify-content: start;
+    gap: 20px;
+}
+
+.container .topBar .userDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 4px;
+}
+
+#username {
+    font-size: small;
+    font-weight: bold;
+    color: #583196;
+}
+
+#name {
+    font-size: larger;
+    font-weight: 600;
+    color: var(--dominant);
+}
+
+.container .profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    object-fit: cover;
+}
+
+.fa-heart, .fa-comment, .fa-share {
+    margin-right: 3px;
+    color: var(--dominant);
+}
+
+
+.container .content {
+    margin-top: 5px;
+    color: var(--dominant);
+    font-family: "Poppins", sans-serif;
+}
+
+.container .bottomBar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    color: var(--dominant);
+    /* font-size: small; */
+    gap: 20px;
+}
+
+.container i {
+    cursor: pointer;
+}
+
+.container .likes, .comments {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+.container .line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--dominant);
+    opacity: 0.5;
+}
+
+.container .comment {
+    width: 100%;
+    display: flex;    
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.container .topBar2 {
+    height: fit-content;
+}
+
+.container .time {
+    align-self: flex-start;
+    /* justify-self: flex-end; */
+    margin-right: 10px;
+    margin-left: auto;
+    font-size: small;
+    font-style: oblique;
+    color: var(--dominant);
+}
+
+.container .comment .content {
+    padding: 2px 50px;
+}

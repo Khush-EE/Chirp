@@ -2,10 +2,11 @@
 
 .container {
     min-height: 100vh;
-    width: 100vw;
+    width: 80vw;
     display: grid;
-    grid-template-columns: 22vw 22vw 22vw 22vw;
+    grid-template-columns: 24vw 24vw 24vw;
     padding: 2vw;
+    box-sizing: border-box;
     gap: 2vw;
     overflow-y: scroll;
 }
@@ -14,14 +15,73 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 60vh;
+    height: 45vh;
     gap: 10px;
-    border: 2px solid var(--dominant);
+    /* border: 2px solid var(--dominant); */
     padding: 15px;
+    overflow-y: hidden;
 }
 
-.chirp img {
-    height: 40%;
+.chirp .profile-part {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 15px;
+}
+
+.chirp .profile-part div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--dominant);
+    /* gap: 3px; */
+}
+
+.chirp .bottomBar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    justify-content: start;
+}
+
+.chirp .likes, .comments {
+    color: var(--dominant);
+    font-size: small;
+}
+
+.chirp .fa-heart, .fa-comment, .fa-share {
+    margin-right: 3px;
+    color: var(--dominant);
+}
+
+.chirp .profile-part div #username {
+    font-size: smaller;
+    font-weight: bold;
+    color: #583196;
+}
+
+.chirp .profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.chirp .content {
+    font-size: 0.9em;
+    color: var(--dominant);
+    /* color: #d0b3ff; */
+}
+
+.chirp .image {
+    height: 25vh;
     object-fit: cover;
     /* padding: 15px; */
 }
